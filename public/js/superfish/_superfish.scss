@@ -1,0 +1,101 @@
+/*** ESSENTIAL STYLES ***/
+.sf-menu {
+    display: inline-block;
+}
+
+.sf-menu, .sf-menu * {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sf-menu a {
+    display: block;
+    position: relative;
+    padding: 8px 15px;
+    text-decoration: none;
+    @include transition-property(background, color);
+    @include transition-duration(0.3s);
+    @include transition-timing-function(ease);
+}
+
+.sf-menu li {
+	position: relative;
+    text-align: left;
+    white-space: nowrap;
+    *white-space: normal;
+}
+
+.sf-menu > li {
+    float: left;
+    text-align: center;
+}
+
+.sf-menu li:hover > ul,
+.sf-menu li.sfHover > ul {
+    display: block;
+}
+
+.sf-menu > li > a{
+    color: $gris;
+    text-transform: uppercase;
+    font-size:14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    @include transition-property(opacity);
+    @include transition-duration(0.3s);
+    @include transition-timing-function(ease);
+    opacity:1;
+    &:hover{
+        opacity:0.6;
+    }
+}
+
+.sf-menu ul {
+	position: absolute;
+	display: none;
+	top: 100%;
+	left: 0;
+	z-index: 99;
+    background-color: $gris;
+    padding: 5px;
+    @include border-radius(5px);
+}
+
+.sf-menu ul ul {
+    top: 0;
+    left: calc(100% + 10px);
+}
+
+.sf-menu ul li a,
+.sf-menu ul ul li a {
+    color: $blanc;
+    font-size: 14px;
+    @include border-radius(5px);
+}
+
+.sf-menu ul li a:hover,
+.sf-menu ul ul li a:hover{ 
+    background-color: $blanc;
+    color: $gris;
+}
+
+.sf-arrows .sf-with-ul {
+    padding-right: 30px;
+}
+
+.sf-arrows .sf-with-ul:after {
+    content:'\f107';
+    font-family: "Font Awesome 5 Solid";
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    margin-top: -8px;
+}
+
+.sf-arrows ul .sf-with-ul:after {
+    content:'\f105';
+    font-family: "Font Awesome 5 Solid";
+    margin-top: -8px;
+    margin-right: -3px; 
+}

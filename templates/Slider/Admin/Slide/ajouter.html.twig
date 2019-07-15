@@ -1,0 +1,44 @@
+{% extends "General/Admin/Layout/layout.html.twig" %}
+
+{% block contentTitre %} Ajouter un slide pour : {{ slider.titre }}{% endblock %}
+
+{% block breadcrumb %}
+	<div id="breadcrumb">
+		{{ include("General/Admin/Include/breadcrumb.html.twig") }}
+	</div>
+{% endblock %}
+
+{% block content %}
+
+	{{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
+
+		{{ form_errors(form) }}
+		
+		{{ form_label(form.titre, "Titre *") }}
+		{{ form_errors(form.titre) }}
+		{{ form_widget(form.titre, {'attr': {'class': 'form-elem big'}}) }}
+
+		{{ form_label(form.lien, "Lien") }}
+		{{ form_errors(form.lien) }}
+		{{ form_widget(form.lien, {'attr': {'class': 'form-elem big'}}) }}
+
+		{{ form_label(form.fileimage, "Image *") }}
+		{{ form_errors(form.fileimage) }}
+		{{ form_widget(form.fileimage, {'attr': {'class': 'form-elem big'}}) }}
+		<div class="form-legende">
+			L'image doit faire au minimum exactement 640px par 480px<br>Le format doit être (jpg, png)<br>Le poid ne doit pas dépacer 3Mo
+		</div>
+
+		{{ form_label(form.contenu, "Contenu *") }}
+		{{ form_errors(form.contenu) }}
+		{{ form_widget(form.contenu, {'attr': {'class': 'form-elem big'}}) }}
+
+        <br>
+
+        {{ form_widget(form.Enregistrer, {'attr': {'class': 'form-submit medium turquoise'}}) }}
+
+        {{ form_rest(form) }}
+
+	{{ form_end(form) }}
+
+{% endblock %}

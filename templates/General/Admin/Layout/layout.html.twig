@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width; initial-scale=1;">
+	<title>Administration</title>
+	<link rel="icon" type="image/png" href="{{ asset('img/admin/favicon.png') }}">
+	{% block cssBefore %}{% endblock %}
+    <link href="{{ asset('css/admin/app.css')}}" rel="stylesheet" type="text/css">
+	{% block cssAfter %}{% endblock %}
+</head>
+
+<body>
+	
+	<main class="main">
+			
+		<!-- Le menu -->
+		{{ include("General/Admin/Include/menu.html.twig") }}
+
+		<div class="container">
+			
+			<!-- Le header -->
+			{{ include("General/Admin/Include/header.html.twig") }}
+			
+			<!-- Titre principal de la page -->
+			<div class="contentTitre">
+				<h1>{% block contentTitre %}Bienvenue sur l'administration{% endblock %}</h1>
+			</div>
+
+			<!-- Breadcrumb au dessus du contenu -->
+			{% block breadcrumb %}
+            {% endblock %}      
+
+			<div class="content">
+
+				<!-- Affichage des messages en session -->
+				{{ include("General/Admin/Include/flashbag.html.twig") }}
+				
+				<!-- Contenu principal -->
+				{% block content %}
+				{% endblock %}
+
+			</div>
+
+		</div>
+
+	</main>
+
+	<script type="text/javascript" src="{{ asset('js/jquery/jquery.js')}}"></script>
+	<script type="text/javascript" src="{{ asset('js/jquery/jquery-ui.js')}}"></script>
+	<script type="text/javascript" src="{{ asset('js/scroll/scroll.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/sweet/sweet.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/datepicker/langue/fr.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/datepicker/timepicker.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/tinymce/tinymce.min.js')}}"></script>
+	<script type="text/javascript" src="{{ asset('js/select2/select2.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/sortable.js')}}"></script>
+    {% block scriptBefore %}{% endblock %}
+	<script type="text/javascript" src="{{ asset('js/admin/app.js')}}"></script>
+	{% block scriptAfter %}{% endblock %}
+
+</body>
+</html>

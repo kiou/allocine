@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+	<title>{% block metaTitle %}{% endblock %}</title>
+	<meta name="description" content="{% block metaDescription %}{% endblock %}">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width; height=device-height; initial-scale=1; minimum-scale=1; maximum-scale=1">
+
+    {% block openGraph %}{% endblock %}
+
+	<link rel="icon" type="image/png" href="{{ asset('img/layout/favicon.png') }}">
+	<link href="{{ asset('css/app.css')}}" rel="stylesheet" type="text/css">
+
+	{% block css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- Newsletter -->
+    {{ render(controller('App\\Controller\\User\\UserController::ClientNewsletterBloc')) }}
+
+    <!-- Header mobile -->
+    {{ include("General/Include/headermobile.html.twig") }}
+
+    <main class="main">
+
+        <!-- Header -->
+        {{ include("General/Include/header.html.twig") }}
+
+        <!-- Breadcrumb -->
+        {% block breadcrumb %}{% endblock %}
+
+        <!-- Titre du contenu -->
+        <div class="contentTitle">
+            <div class="inner">
+                {% block contentTitle %}{% endblock %}
+            </div>
+        </div>
+
+        <!-- Contenu principal du site -->
+        <div class="content">
+            <div class="inner">
+
+                <!-- Messages -->
+                {{ include("General/Include/flashbag.html.twig") }}
+
+                {% block content %}
+                {% endblock %}
+
+                <div class="clear"></div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        {{ include("General/Include/footer.html.twig") }}
+
+        <!--Pied de page -->
+        {{ include("General/Include/bas.html.twig") }}
+
+	</main>
+	
+	{% if app.environment == 'prod' %}
+        <script type="text/javascript" src="{{ asset('js/app_min.js')}}"></script>
+	{% else %}
+		<script type="text/javascript" src="{{ asset('js/jquery/jquery.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('js/superfish/superfish.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('js/owl/owl.carousel.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('js/lightbox/lightbox.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('js/sticky.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('js/rating.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('js/app.js')}}"></script>
+	{% endif %}
+    {% block script %}{% endblock %}
+
+</body>
+</html>

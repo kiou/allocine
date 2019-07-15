@@ -1,0 +1,188 @@
+@media screen and (max-width: 1200px) {
+
+    .inner{ margin: 0px 30px; }
+
+    .newsletter{
+        .inner{ margin: 0px auto; }
+    }
+
+    .aboutimageRight{ padding: 110px; }
+
+}
+
+@media screen and (max-width: 1024px) {
+
+    .aboutimageRight{ padding: 90px; }
+
+    .inner{ margin: 0px 20px; }
+
+    .evenement{
+        min-height: auto;
+    }
+
+    .actualite{
+        min-height: auto;
+    }
+
+}
+
+@media screen and (max-width: 920px) {
+
+    .header .navigation,
+    .headerReseaux{ display: none; }
+
+    .headerBtnMobile{ display: block; }
+
+    .headerLeft{ width: 50%; }
+    .headerCenter{ width: 0%; }
+    .headerRight{ width: 50%; }
+
+    .headerPictos{ padding:30px 0px 30px 20px; }
+
+    .aboutimageRight{ padding: 60px; }
+
+    .footerCol{
+        width: 100%;
+        padding:0px 0px 25px 0px;
+        &:first-child{
+            padding:0px 0px 25px 0px;
+        }
+        &:last-child{
+            padding:0px 0px 25px 0px;
+        }
+    }
+
+    .contactAdresseCol{
+        display: block;
+        padding:8px 0px;
+    }
+
+    .owl-nav{ display: none; }
+
+    .sliderContenu{
+        width: 100%;
+        padding: 40px;
+    }
+
+    .calendrierLeft{
+        width: 40%;
+    }
+
+    .calendrierRight{
+        width: calc(60% - 40px);
+        margin-left: 40px;
+    }
+    
+}
+
+@media screen and (max-width: 800px) {
+
+    h1{
+        font-size: 32px;
+        line-height:32px;
+    }
+
+    h2{
+        font-size: 20px;
+        line-height:25px;
+        &.title{
+            font-size: 30px;
+            line-height:30px;
+        } 
+    }
+
+    h3{
+        font-size: 17px;
+        line-height:21px;
+    }
+
+    .aboutimageLeft{ display: none;}
+
+    .aboutimageRight{
+        width: 100%;
+        @include border-radius($borderBox);
+    }
+
+    .inner{ margin: 0px 10px; }
+
+    .form-recherche{
+        width: 100% !important;
+        margin-right: 0px !important;
+    }
+
+    .recherche{
+        padding: 30px;
+    }
+
+    .galerie{
+        width: calc((100% / 2) - 30px);
+    }
+
+    .galerieImages{
+        .galerieImage{
+            width: calc((100% / 3) - 10px);
+        }
+    }
+
+    .evenement{
+        width: calc((100% / 2) - 30px);
+    }
+
+    .calendrierLeft{
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .calendrierRight{
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    .actualite{
+        width: calc((100% / 2) - 30px);
+    }
+
+}
+
+@media screen and (max-width: 640px){
+
+    .aboutimageRight{ padding: 40px; }
+
+    .newsletter{
+        .inner{
+            max-width: 60%;
+        }
+    }
+
+    .partage{
+        button{
+            width: 100%;
+            margin-bottom: 15px;
+        }
+    }
+
+    .sliderContenu{
+        p{
+            display: none;
+        }
+    }
+
+    .galerie{
+        width: calc(100% - 30px);
+    }
+
+    .galerieImages{
+        .galerieImage{
+            width: calc((100% / 2) - 10px);
+        }
+    }
+
+    .evenement{
+        width: calc(100% - 30px);
+    }
+
+    .actualite{
+        width: calc(100% - 30px); 
+    }
+
+}

@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+
+.pagination{
+	width: 100%;
+	padding: 20px 0px;
+    span{
+        color: $blanc;
+        display: inline-block;
+        @include border-radius(3px);
+        background-color: $grisClair;
+        font-weight: normal;
+        font-size: 13px;
+        &.current{
+            padding: 10px 14px;
+            background-color: $rouge;
+        }
+    }
+    a{
+        padding: 10px 14px;
+        font-size: 13px;
+        font-weight: normal;
+        color: $blanc;
+        display: block;
+    }
+}

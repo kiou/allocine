@@ -1,0 +1,75 @@
+admin_evenement_manager:
+    path:     /admin/evenement/gestion
+    defaults: { _controller: App\Controller\Evenement\EvenementController::managerAdmin }
+
+admin_evenement_ajouter:
+    path:     /admin/evenement/ajouter
+    defaults: { _controller: App\Controller\Evenement\EvenementController::ajouterAdmin }
+
+admin_evenement_publier:
+    path:     /admin/evenement/publier/{id}
+    defaults: { _controller: App\Controller\Evenement\EvenementController::publierAdmin }
+    requirements:
+        id: \d+
+
+admin_evenement_modifier:
+    path:     /admin/evenement/modifier/{id}
+    defaults: { _controller: App\Controller\Evenement\EvenementController::modifierAdmin }
+    requirements:
+        id: \d+
+
+admin_evenement_supprimer:
+    path:     /admin/evenement/supprimer/{id}
+    defaults: { _controller: App\Controller\Evenement\EvenementController::supprimerAdmin }
+    requirements:
+        id: \d+
+
+admin_evenement_supprimer_image:
+    path:     /admin/evenement/supprimer-image/{id}
+    defaults: { _controller: App\Controller\Evenement\EvenementController::AdminSupprimerImage }
+    requirements:
+        id: \d+
+
+client_evenement_manager:
+    path:     /evenements
+    defaults: { _controller: App\Controller\Evenement\EvenementController::managerClient }
+
+client_evenement_view:
+    path:     /evenement/{slug}/{id}
+    defaults: { _controller: App\Controller\Evenement\EvenementController::viewClient }
+    requirements:
+        slug: ([a-z-0-9]*)
+        id: \d+
+
+client_calendrier_ajax:
+    path:     /evenement/calendrier/{annee}/{mois}
+    defaults:
+        _controller: App\Controller\Evenement\EvenementController::calendrierEvenement
+        annee : null
+        mois : null
+    requirements:
+        annee: \d+
+        mois: \d+
+
+#Catégorie
+admin_evenementcategorie_manager:
+    path:     /admin/evenement-categorie/manager
+    defaults: { _controller: App\Controller\Evenement\CategorieController::managerAdmin }
+
+admin_evenementcategorie_ajouter:
+    path:     /admin/evenement-categorie/ajouter
+    defaults: { _controller: App\Controller\Evenement\CategorieController::ajouterAdmin }
+
+admin_evenementcategorie_modifier:
+    path:     /admin/evenement-categorie/modifier/{id}
+    defaults: { _controller: App\Controller\Evenement\CategorieController::modifierAdmin }
+    requirements:
+        id: \d+
+
+admin_evenementcategorie_supprimer:
+    path:     /admin/evenement-categorie/supprimer/{id}
+    defaults: { _controller: App\Controller\Evenement\CategorieController::supprimerAdmin }
+    requirements:
+        id: \d+
+
+

@@ -1,0 +1,26 @@
+{% if slides|length > 0 %}
+    <div class="slider owl-carousel owl-theme">
+        {% for slide in slides %}
+
+            <div class="sliderSlide">
+                <div class="sliderImage">
+                    <img src="{{ asset('img/slider/slide/miniature/' ~ slide.image) }}">
+                </div>
+
+                <div class="sliderPattern"></div>
+
+                <div class="sliderContenu">
+                    <div>
+                        <h2 class="title">{{ TruncateText(slide.titre, 80) }}</h2>
+                        <p>{{ TruncateText(slide.contenu, 180)|nl2br }}</p>
+                        {% if slide.lien %}
+                            <a href="{{ slide.lien }}" class="btn type1" data-btn="{{ 'slider.client.link.plus'|trans }}">{{ 'slider.client.link.plus'|trans }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+{% endif %}

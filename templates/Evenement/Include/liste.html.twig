@@ -1,0 +1,64 @@
+<div class="bloc">
+
+    <div class="blocHeader">
+        <h2 class="title">{{ 'evenement.client.include.liste.title'|trans }}</h2>
+        <p>{{ 'evenement.client.include.liste.soustitle'|trans }}</p>
+    </div>
+
+    <div class="evenements">
+        {% if evenements %}
+            {% for evenement in evenements %}
+                <div class="evenement navFull matchHeight" data-url="{{ path('client_evenement_view',{'slug': evenement.slug, 'id': evenement.id})}}">
+                    <div class="evenementImage">
+                        {% if evenement.image %}
+                            <img src="{{ asset('img/evenement/miniature/' ~ evenement.image) }}">
+                        {% else %}
+                            <img src="{{ asset('img/evenement/miniature/alt.jpg') }}">
+                        {% endif %}
+
+                        <div class="evenementPattern"></div>
+
+                        <div class="evenementDate">
+
+                            <div class="evenementDateJour">
+                                <p>{{ evenement.debut|date("d") }}</p>
+                            </div>
+                            <div class="evenementDateMois">
+                                <p>{{ evenement.debut|date("m") }}</p>
+                            </div>
+                            <div class="evenementDateAnnee">
+                                <p>{{ evenement.debut|date("Y") }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="evenementBottom">
+                        {% if evenement.categorie %}
+                            <div class="evenementCategorie">
+                                <p>{{ evenement.categorie.nom }}</p>
+                            </div>
+                        {% endif %}
+
+                        <div class="evenementTitre">
+                            <h3><a href="{{ path('client_evenement_view',{'slug': evenement.slug, 'id': evenement.id})}}">{{ TruncateText(evenement.titre, 30) }}</a></h3>
+                        </div>
+
+                        <div class="evenementResume">
+                            <p>{{ TruncateText(evenement.resume, 120) }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>{{ 'evenement.client.validators.empty'|trans }}</p>
+        {% endif %}
+
+        <div class="clear"></div>
+    </div>
+
+    <div class="blocFooter">
+        <a href="{{ path('client_evenement_manager') }}" class="btn" data-btn="{{ 'evenement.client.include.liste.voirplus'|trans }}">{{ 'evenement.client.include.liste.voirplus'|trans }}</a>
+    </div>
+
+</div>
+

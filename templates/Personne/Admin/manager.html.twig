@@ -1,0 +1,57 @@
+{% extends "General/Admin/Layout/layout.html.twig" %}
+
+{% block contentTitre %}Gestion des acteurs/réalisateurs{% endblock %}
+
+{% block content %}
+	<div id="recherche">
+		<form action="{{ path('admin_personne_manager') }}" method="post">
+			<input type="text" name="recherche" class="form-elem medium" value="{{ recherches.recherche | default('') }}">
+
+			<button type="submit" name="addRecherche"><i class="fa fa-search"></i></button>
+		</form>
+	</div>
+
+	<table class="table">
+		
+		<tr>
+			<th class="left" width="90%">Film</th>
+			<th width="10%" colspan="2">Actions</th>
+		</tr>
+
+		{% for personne in pagination %}
+			
+			<tr>
+
+				<td class="left">
+					<p class="tableDate">Ajouté le {{ personne.created|date("d/m/Y à H:i") }}</p>
+					{% if personne.changed is not null %}
+						<p class="tableDate">Modifié le {{ personne.changed|date("d/m/Y à H:i") }}</p>
+					{% endif %}
+					<p><strong>{{ personne.prenom }} {{ personne.nom }}</strong></p>
+				</td>
+
+                <td><a href="{{ path('admin_personne_modifier',{'id': personne.id})}}" title="Modifier la personne"><i class=" tableAction fa fa-pencil-alt"></i></a></td>
+
+				<td>
+					{% if personne.filmacteurs is not empty or personne.filmrealisateurs is not empty %}
+						X
+					{% else %}
+						<a href="{{ path('admin_personne_supprimer',{'id': personne.id})}}" class="sweetDelete" title="Supprimer la personne" data-title="Supprimer la personne" data-text="êtes vous sur ?"><i class=" tableAction fa fa-trash"></i></a>
+					{% endif %}
+				</td>
+			</tr>
+
+		{% else %}
+			<tr>
+				<td colspan="3">Aucune personne</td>
+			</tr>
+		{% endfor %}
+
+	</table>
+
+	{# display navigation #}
+	<div class="navigation">
+	    {{ knp_pagination_render(pagination) }}
+	</div>
+	
+{% endblock %}

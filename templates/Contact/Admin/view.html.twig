@@ -1,0 +1,17 @@
+{% extends "General/Admin/Layout/layout.html.twig" %}
+
+{% block contentTitre %}Afficher un contact{% endblock %}
+
+{% block breadcrumb %}
+	<div id="breadcrumb">
+		{{ include("General/Admin/Include/breadcrumb.html.twig") }}
+	</div>
+{% endblock %}
+
+{% block content %}
+	<p><strong>Nom:</strong> {{ contact.nom }}</p>
+	<p><strong>Prénom:</strong> {{ contact.prenom }}</p>
+	<p><stong>Email:</stong> {{ contact.email }}</p>
+	<p><strong>Objet:</strong> {{ contact.objet.nom }}</p>
+	<br><p><strong>Message:</strong><br> {{ contact.message }}</p>
+{% endblock %}

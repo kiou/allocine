@@ -1,0 +1,16 @@
+contact:
+    label:
+        nom: Nom *
+        prenom: Prénom *
+        email: Email *
+        objet: Objet *
+        objetall: Choisir un objet
+        message: Message *
+        submit: Nous contacter
+
+    client:
+        metatitle: Contact
+        metadescription: Contact
+        title: Contact
+        validators:
+            succes: Votre demande de contact à bien été prise en compte

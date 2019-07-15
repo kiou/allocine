@@ -1,0 +1,71 @@
+{% extends "General/Admin/Layout/layout.html.twig" %}
+
+{% block contentTitre %}Gestion des sliders{% endblock %}
+
+{% block content %}
+	<div id="recherche">
+		<form action="{{ path('admin_slider_manager') }}" method="post">
+            <select name="langue" class="form-elem medium">
+                <option value="">Choisir une langue</option>
+                {% for langue in langues %}
+                    {% if recherches.langue == langue.code %}
+                        <option value="{{ langue.code }}" selected>{{ langue.nom }}</option>
+                    {% else %}
+                        <option value="{{ langue.code }}">{{ langue.nom }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+			<input type="text" name="recherche" class="form-elem medium" value="{{ recherches.recherche | default('') }}">
+
+			<button type="submit" name="addRecherche"><i class="fa fa-search"></i></button>
+		</form>
+	</div>
+
+	<table class="table">
+		
+		<tr>
+			<th class="left" width="75%">Slider</th>
+			<th width="15%">Slide</th>
+			<th colspan="2" width="10%">Actions</th>
+		</tr>
+
+		{% for slider in pagination %}
+			
+			<tr>
+
+				<td class="left">
+					<p class="tableDate">Ajouté le {{ slider.created|date("d/m/Y à H:i") }}</p>
+					{% if slider.changed is not null %}
+						<p class="tableDate">Modifié le {{ slider.changed|date("d/m/Y à H:i") }}</p>
+					{% endif %}
+					<p><strong>{{ slider.titre }}</strong></p>
+				</td>
+
+				<td>
+					<a href="{{ path('admin_sliderslide_manager',{'slider': slider.id}) }}" class="btn turquoise">Gestion ({{ slider.slides|length }})</a>
+				</td>
+
+				<td>
+                    <a href="{{ path('admin_slider_modifier',{'id': slider.id})}}" title="Modifier le slider"><i class=" tableAction fa fa-pencil-alt"></i></a>
+                </td>
+
+				<td>
+                    <a href="{{ path('admin_slider_supprimer',{'id': slider.id})}}" class="sweetDelete" title="Supprimer le slider" data-title="Supprimer le slider" data-text="êtes vous sur ?"><i class=" tableAction fa fa-trash"></i></a>
+                </td>
+			</tr>
+
+		{% else %}
+			<tr>
+				<td colspan="4">Aucun slider</td>
+			</tr>
+		{% endfor %}
+
+	</table>
+
+	{# display navigation #}
+	<div class="navigation">
+	    {{ knp_pagination_render(pagination) }}
+	</div>
+	
+{% endblock %}

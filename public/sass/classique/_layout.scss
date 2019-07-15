@@ -1,0 +1,317 @@
+.main{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.inner{
+    max-width: 1170px;
+    margin: 0px auto;
+}
+
+.header{
+    background-color: $blanc;
+
+    .navigation{
+        padding:26px 0px 22px 0px;
+    }
+}
+
+.headerLeft{
+    float: left;
+    width:20%;
+}
+
+.headerLogo{
+    a{
+        @include transition-property(opacity);
+        @include transition-duration(0.3s);
+        @include transition-timing-function(ease);
+        padding: 30px 0px;
+        display: block;
+        opacity:1;
+        &:hover{
+            opacity: 0.6;
+        }
+    }
+}
+
+.headerCenter{
+    float: left;
+    width: 60%;
+    text-align: center;
+}
+
+.headerRight{
+    float:right;
+    width: 20%;
+    text-align: right;
+}
+
+.headerReseaux{
+    float: right;
+    padding: 30px 0px;
+    a{
+        @include transition-property(opacity);
+        @include transition-duration(0.3s);
+        @include transition-timing-function(ease);
+        color:$gris;
+        font-size: 19px;
+        display: inline-block;
+        padding: 0px 7px;
+        opacity: 1;
+        &:hover{
+            opacity:0.6;
+        }
+    }
+}
+
+.headerPictos{
+    float: right;
+    padding:30px 0px 30px 30px;
+    a{
+        @include transition-property(opacity);
+        @include transition-duration(0.3s);
+        @include transition-timing-function(ease);
+        color: $gris;
+        font-size:19px;
+        display: inline-block;
+        opacity: 1;
+        &:hover{
+            opacity:0.6;
+        }
+    }
+}
+
+.headerBtnMobile{
+    position: relative;
+    height: 86px;
+    width: 50px;
+    cursor: pointer;
+    display: none;
+    float: right;
+    span{
+        position: absolute;
+        left: 0px;
+        top: 50%;
+        left: 50%;
+        width: 22px;
+        height: 2px;
+        display: block;
+        background-color: $gris;
+        @include transition-property(transform,background);
+        @include transition-duration(0.4s);
+        @include transform(translateX(-50%) translateY(-50%));
+        &::before, &::after{
+            content:'';
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 22px;
+            height: 2px;
+            display: block;
+            background-color: $gris;
+            @include transform-origin(50%, 50%);
+            @include transition-property(transform, width);
+            @include transition-duration(0.4s);
+            @include transition-timing-function(ease);
+            @include transform(translateY(-6px));
+        }
+        &::after{
+            @include transform(translateY(6px));
+            width: 17px;
+        }
+    }
+    &.active span{
+        background: transparent;
+    }
+    &.active span::before{
+        @include transform(translateY(0px) rotate(45deg));
+        background-color: $violet;
+    }
+    &.active span::after{
+        @include transform(translateY(0px) rotate(-45deg));
+        width: 22px;
+        background-color: $violet;
+    }
+}
+
+.headerMobile{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index:1000;
+    background-color:rgba($grisClair,0.8);
+    display: none;
+
+    .navigation{
+        width: 280px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        bottom: 0px;
+        background-color: $gris;
+        overflow-y: auto;
+        a{
+            display: block;
+            color: $blanc;
+            padding:15px 0px 15px 20px;
+            background-color: $gris;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-bottom: 1px solid darken($gris,2%);
+        }
+        ul{
+            ul{
+                a{
+                    padding-left: 30px;
+                    background-color: lighten($gris,3%);
+                    border-bottom: 1px solid lighten($gris,1%);
+                }
+                ul{
+                    a{
+                        padding-left: 40px;
+                        background-color: lighten($gris,6%);
+                        border-bottom: 1px solid lighten($gris,4%);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.content{
+    background-color: $grisClair;
+    min-height: 500px;
+    .inner{
+        padding:30px 0px;
+    }
+}
+
+.contentTitle{
+    background-color: $grisClair;
+    h1{
+        padding-top: 30px;
+    }
+}
+
+.newsletter{
+    background-color: $gris;
+    position: fixed;
+    z-index:100;
+    left: -100px;
+    right: -100px;
+    top: 0px;
+    @include transition-property(transform);
+    @include transition-duration(0.6s);
+    @include transition-timing-function(ease-in-out);
+    @include transform(translateY(-170%) skew(-10deg, 10deg));
+    display: none;
+    &.active{
+        @include transform(translateY(0px));
+        .inner{
+            @include transition-delay(0.4s);
+            opacity:1;
+        }
+    }
+    .inner{
+        @include transition-property(opacity);
+        @include transition-duration(0.2s);
+        @include transition-timing-function(ease-in-out);
+        padding:65px 0px;
+        max-width: 500px;
+        opacity:0;
+    }
+
+    label{
+        color: $blanc;
+    }
+
+    h2{
+        font-size: 40px;
+        line-height: 40px;
+        color: $blanc;
+        font-weight: 400;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+}
+
+.newsletterClose{
+    position: absolute;
+    right: 100px;
+    top: 0px;
+    color: $blanc;
+    cursor: pointer;
+    padding:30px;
+}
+
+.recherche{
+    padding: 30px 30px 10px 30px;
+    background-color: $gris;
+    margin-bottom: 30px;
+    @include border-radius($borderBox);
+}
+
+.bloc{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.blocHeader{
+    text-align: center;
+    margin-bottom: 30px;
+    h2{
+        color: $violet;
+    }
+    p{
+        font-weight: 700;
+    }
+}
+
+.blocFooter{
+    text-align: center;
+}
+
+.footer{
+    background-color: $blanc;
+    .inner{
+        padding:60px 0px;
+    }
+}
+
+.footerLogo{
+    margin-bottom: 20px;
+}
+
+.footerCol{
+    float: left;
+    width: calc(100% / 3);
+    padding:0px 15px;
+    &:first-child{
+        padding:0px 15px 0px 0px;
+    }
+    &:last-child{
+        padding:0px 0px 0px 15px;
+    }
+}
+
+.bas{
+    background-color: $blanc;
+    text-align: center;
+    .inner{
+        border-top:1px solid darken($grisClair,5%);
+        padding:30px 0px;
+    }
+
+    p{
+        font-size: 14px;
+        line-height: 14px;
+    }
+}

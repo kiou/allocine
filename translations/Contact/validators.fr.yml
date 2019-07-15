@@ -1,0 +1,8 @@
+contact:
+    validators:
+        email: Compléter le champ email
+        emailvalide: "Le format de l'email n'est pas bon ex : xyz@exemple.fr"
+        nom: Compléter le champ nom
+        prenom: Compléter le champ prénom
+        objet: Compléter le champ objet
+        message: Compléter le champ message

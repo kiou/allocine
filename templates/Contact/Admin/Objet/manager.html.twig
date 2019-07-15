@@ -1,0 +1,64 @@
+{% extends "General/Admin/Layout/layout.html.twig" %}
+
+{% block contentTitre %}Gestion des objets{% endblock %}
+
+{% block content %}
+    <div id="recherche">
+        <form action="{{ path('admin_contactobjet_manager') }}" method="post">
+            <select name="langue" class="form-elem medium">
+                <option value="">Choisir une langue</option>
+                {% for langue in langues %}
+                    {% if recherches.langue == langue.code %}
+                        <option value="{{ langue.code }}" selected>{{ langue.nom }}</option>
+                    {% else %}
+                        <option value="{{ langue.code }}">{{ langue.nom }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+            <button type="submit" name="addRecherche"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
+	<table class="table">
+		
+		<tr>
+			<th class="left" width="90%">Objet</th>
+			<th colspan="2" width="10%">Actions</th>
+		</tr>
+
+		{% for objet in objets %}
+			
+			<tr>
+
+				<td class="left">
+					<p class="tableDate">Ajouté le {{ objet.created|date("d/m/Y à H:i") }}</p>
+					{% if objet.changed is not null %}
+						<p class="tableDate">Modifié le {{ objet.changed|date("d/m/Y à H:i") }}</p>
+					{% endif %}
+					<p><strong>{{ objet.nom }}</strong></p>
+                    <p>{{ objet.email }}</p>
+				</td>
+
+				<td>
+                    <a href="{{ path('admin_contactobjet_modifier',{'id': objet.id})}}" title="Modifier l'objet"><i class=" tableAction fa fa-pencil"></i></a>
+                </td>
+
+				<td>
+                    {% if objet.contacts|length == 0 %}
+						<a href="{{ path('admin_contactobjet_supprimer',{'id': objet.id})}}" class="sweetDelete" title="Supprimer l'objet" data-title="Supprimer l'objet" data-text="êtes vous sur ?"><i class=" tableAction fa fa-trash"></i></a>
+                    {%  else %}
+                        <a href="#" class="sweetAlert" title="Supprimer l'objet" data-title="Suppression impossible" data-text="Il éxiste une relation avec un contact"><i class="disabled tableAction fa fa-trash"></i></a>
+                    {% endif %}
+                </td>
+			</tr>
+
+		{% else %}
+			<tr>
+				<td colspan="3">Aucun objet</td>
+			</tr>
+		{% endfor %}
+
+	</table>
+
+{% endblock %}

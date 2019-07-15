@@ -1,0 +1,72 @@
+login:
+    path: /connexion
+    defaults: { _controller: App\Controller\User\UserController::Login }
+
+logout:
+    path: /logout
+
+register:
+    path: /inscription
+    defaults: { _controller: App\Controller\User\UserController::Register }
+
+#Newsletter
+client_newsletter_ajout:
+    path: /newsletter-inscription
+    defaults: { _controller: App\Controller\User\UserController::ClientNewsletterAjouter }
+
+admin_newsletter_export:
+    path: /newsletter-export
+    defaults: { _controller: App\Controller\User\UserController::AdminNewsletterExport }
+
+#Réinitialisation de mot de passe
+reinitialisation:
+    path: /reinitialisation
+    defaults: { _controller: App\Controller\User\UserController::Reinitialisation }
+
+reinitialisation_password:
+    path: /reinitialisation/mot-de-passe/{token}
+    defaults: { _controller: App\Controller\User\UserController::ReinitialisationPassword }
+    requirements:
+        token: ([a-z-0-9]*)
+
+#Gestion compte front office
+compte_user_manager:
+    path: /compte
+    defaults: {_controller: App\Controller\User\UserController::ClientCompte}
+
+#Gestion compte back office
+admin_user_compte_modifier:
+    path: /admin/compte/modifier
+    defaults: { _controller: App\Controller\User\UserController::AdminCompteModifier }
+
+#Gestion back office
+admin_user_manager:
+    path: /admin/user/manager
+    defaults: { _controller: App\Controller\User\UserController::AdminManager }
+
+admin_user_historique:
+    path: /admin/user/historique
+    defaults: { _controller: App\Controller\User\UserController::AdminHistorique }
+
+admin_user_ajouter:
+    path: /admin/user/ajouter
+    defaults: { _controller: App\Controller\User\UserController::AdminAjouter }
+
+admin_user_publier:
+    path: /admin/user/publier/{id}
+    defaults: { _controller: App\Controller\User\UserController::AdminPublier }
+    requirements:
+        id: \d+
+
+admin_user_modifier:
+    path: /admin/user/modifier/{id}
+    defaults: { _controller: App\Controller\User\UserController::AdminModifier }
+    requirements:
+        id: \d+
+
+admin_user_supprimer_avatar:
+    path: /admin/user/supprimer-avatar/{id}
+    defaults: { _controller: App\Controller\User\UserController::AdminSupprimerAvatar }
+    requirements:
+        id: \d+
+

@@ -1,0 +1,64 @@
+{% extends "General/Layout/layout.html.twig" %}
+
+{% block metaTitle %}{{ 'contact.client.metatitle'|trans }}{% endblock %}
+{% block metaDescription %}{{ 'contact.client.metadescription'|trans }}{% endblock %}
+
+{% block contentTitle %}
+    <h1>{{ 'contact.client.title'|trans }}</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="contactMap"></div>
+
+    <div class="contactAdresse">
+        <div class="contactAdresseCol">
+            <p><i class="fa fa-phone"></i> +(33)1 02 03 04 05</p>
+        </div>
+        <div class="contactAdresseCol">
+            <p><i class="fa fa-map-marker"></i> 1 rue André Real 38000 Grenoble</p>
+        </div>
+        <div class="contactAdresseCol">
+            <p><i class="fa fa-envelope"></i> contact@colocarts.com</p>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    {{ form_start(form, {'attr': {'class': 'form-horizontal', novalidate: 'novalidate'}}) }}
+
+        {{ form_errors(form) }}
+
+        {{ form_label(form.nom, 'contact.label.nom'|trans ) }}
+        {{ form_errors(form.nom) }}
+        {{ form_widget(form.nom, {'attr': {'class': 'form-elem big'}}) }}
+
+        {{ form_label(form.prenom, 'contact.label.prenom'|trans ) }}
+        {{ form_errors(form.prenom) }}
+        {{ form_widget(form.prenom, {'attr': {'class': 'form-elem big'}}) }}
+
+        {{ form_label(form.email, 'contact.label.email'|trans ) }}
+        {{ form_errors(form.email) }}
+        {{ form_widget(form.email, {'attr': {'class': 'form-elem big'}}) }}
+
+        {{ form_label(form.objet, 'contact.label.objet'|trans ) }}
+        {{ form_errors(form.objet) }}
+        {{ form_widget(form.objet, {'attr': {'class': 'form-elem big'}}) }}
+
+        {{ form_label(form.message, 'contact.label.message'|trans ) }}
+        {{ form_errors(form.message) }}
+        {{ form_widget(form.message, {'attr': {'class': 'form-elem big'}}) }}
+
+        {{ form_widget(form.langue, {'value': app.request.locale}) }}
+
+        <br>
+
+        {{ form_widget(form.Enregistrer, {
+            'attr' : {'data-btn': 'contact.label.submit'|trans, 'class' : 'btn' },
+            'label' : 'contact.label.submit'|trans
+        }) }}
+
+        {{ form_rest(form) }}
+
+    {{ form_end(form) }}
+
+{% endblock %}

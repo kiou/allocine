@@ -1,0 +1,29 @@
+security:
+
+    encoders:
+        App\Entity\User\User:
+            algorithm: bcrypt
+
+    providers:
+        users:
+            entity:
+                class: App\Entity\User\User
+                property: email
+
+    firewalls:
+        main:
+            anonymous: true
+            provider: users
+            form_login:
+                login_path: login
+                check_path: login
+                csrf_token_generator: security.csrf.token_manager
+                success_handler: App\Redirection\AfterLoginRedirection
+            logout:
+                path:   logout
+
+    access_control:
+        - { path: ^/(en|fr)/connexion, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(en|fr)/inscription, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(en|fr)/admin, roles: ROLE_ADMIN }
+        - { path: ^/(en|fr)/compte, roles: [ROLE_USER, ROLE_ADMIN] }

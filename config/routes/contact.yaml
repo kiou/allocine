@@ -1,0 +1,40 @@
+admin_contact_manager:
+    path:     /admin/contact/gestion
+    defaults: { _controller: App\Controller\Contact\ContactController::managerAdmin }
+
+admin_contact_supprimer:
+    path:     /admin/contact/supprimer/{id}
+    defaults: { _controller: App\Controller\Contact\ContactController::supprimerAdmin }
+    requirements:
+        id: \d+
+
+admin_contact_view:
+    path:     /admin/contact/{id}
+    defaults: { _controller: App\Controller\Contact\ContactController::viewAdmin }
+    requirements:
+        id: \d+
+
+client_contact_form:
+    path:     /contact
+    defaults: { _controller: App\Controller\Contact\ContactController::ajouterClient }
+
+#Objet
+admin_contactobjet_manager:
+    path:     /admin/contact-objet/manager
+    defaults: { _controller: App\Controller\Contact\ObjetController::managerAdmin }
+
+admin_contactobjet_ajouter:
+    path:     /admin/contact-objet/ajouter
+    defaults: { _controller: App\Controller\Contact\ObjetController::ajouterAdmin }
+
+admin_contactobjet_modifier:
+    path:     /admin/contact-objet/modifier/{id}
+    defaults: { _controller: App\Controller\Contact\ObjetController::modifierAdmin }
+    requirements:
+        id: \d+
+
+admin_contactobjet_supprimer:
+    path:     /admin/contact-objet/supprimer/{id}
+    defaults: { _controller: App\Controller\Contact\ObjetController::supprimerAdmin }
+    requirements:
+        id: \d+

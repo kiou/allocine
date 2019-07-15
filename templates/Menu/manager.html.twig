@@ -1,0 +1,38 @@
+{% if menus is not empty %}
+    <nav class="navigation">
+
+        <!-- parents -->
+        <ul {% if sfmenu %} class="sf-menu" {% endif %}>
+            {% for menu in menus %}
+                <li>
+                    {{ include("Menu/actions.html.twig",{menu:menu}) }}
+                    {% if menu.enfants is defined %}
+
+                        <!-- enfants -->
+                        <ul>
+                            {% for enfant in menu.enfants %}
+                                <li>
+                                    {{ include("Menu/actions.html.twig",{menu:enfant}) }}
+                                    {% if enfant.enfants is defined %}
+
+                                        <!-- enfants 2éme niveau -->
+                                        <ul>
+                                            {% for enfantenfant in enfant.enfants %}
+                                                <li>{{ include("Menu/actions.html.twig",{menu:enfantenfant}) }}</li>
+                                            {% endfor %}
+                                        </ul><!-- Fin enfants 2éme niveau -->
+
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul> <!-- Fin enfants -->
+
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul> <!-- Fin parents -->
+
+
+        <div class="clear"></div>
+    </nav>
+{% endif %}

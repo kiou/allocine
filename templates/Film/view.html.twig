@@ -1,0 +1,102 @@
+{% extends "General/Layout/layout.html.twig" %}
+
+{% block metaTitle %}{{ film.referencement.title }}{% endblock %}
+{% block metaDescription %}{{ film.referencement.description }}{% endblock %}
+
+{% block openGraph %}
+    {% include"Referencement/Include/view.html.twig" with {'data': film} %}
+{% endblock %}
+
+{% block breadcrumb %}
+    {{ include("General/Include/breadcrumb.html.twig", {'breadcrumb':breadcrumb }) }}
+{% endblock %}
+
+{% block contentTitle %}
+    <h1>{{ film.titre }}</h1>
+{% endblock %}
+
+{% block content %}
+    
+    <div class="viewFicheFilm">
+
+        <div class="viewFicheFilmLeft">
+            {% if film.image %}
+                <img src="{{ asset('img/film/miniature/' ~ film.image) }}">
+            {% else %}
+                <i class="far fa-image"></i>
+            {% endif %}
+            <p><strong>Date de sortie :</strong> {{ film.datedesortie|date("d/m/Y") }}</p>
+            {% if film.acteurs is not empty %}
+                <p>
+                    <strong>Acteurs:</strong> 
+                    {% for acteur in film.acteurs %}
+                        <a href="{{ path('client_personne_view',{'slug': acteur.slug, 'id': acteur.id}) }}">{{ acteur.prenom }} {{ acteur.nom }}</a>{% if loop.last == false %}, {% endif %}
+                    {% endfor %}
+                </p>
+            {% endif %}
+            {% if film.realisateurs is not empty %}
+                <p>
+                    <strong>Réalisateurs:</strong> 
+                    {% for realisateur in film.realisateurs %}
+                        <a href="{{ path('client_personne_view',{'slug': realisateur.slug, 'id': realisateur.id}) }}">{{ realisateur.prenom }} {{ realisateur.nom }}</a>{% if loop.last == false %}, {% endif %}
+                    {% endfor %}
+                </p>
+            {% endif %}
+        </div>
+
+        <div class="viewFicheFilmRight">
+            
+            <div class="viewFicheFilmBa">
+                {{ film.ba|raw }}
+            </div>
+
+            <div class="viewFicheFilmSynopsis">
+                <h3>Synopsis</h3>
+                <p>{{ film.synopsis }}</p>
+            </div>
+
+            {% if film.galeriefilm.images is defined %}
+                <h3>Galerie</h3>
+                <div class="viewFicheFilmeGaleries">
+
+                    {% for images in film.galerieFilm.images %}
+                        <div class="viewFicheFilmeGalerie">
+                            <a href="{{ asset('img/galerie/tmp/' ~ images.image) }}" data-lightbox="lightbox" data-title="{{ images.titre }}"><img src="{{ asset('img/galerie/miniature/' ~ images.image) }}"></a>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+            <div class="viewFicheFilmRating">
+                
+                <h3>Commentaire</h3>
+                {% for commentaire in film.commentaires %}
+                    {{commentaire.rating}}/5
+                    {{commentaire.commentaire}}<br><br>
+                {% endfor %}
+
+                {% if app.user %}
+                    {% if postActive == true %}
+                        <div id="rating"></div>
+                        <form action="{{ path('client_commentaire_ajouter')}}" method="post" id="formCommentaire">
+                            <input type="hidden" name="rating" value="0">
+                            <input type="hidden" name="filmid" value="{{ film.id }}">
+                            <input type="hidden" name="filmslug" value="{{ film.slug }}">
+                            <textarea name="commentaire" class="form-elem "></textarea>
+                            <br>
+                            <button type="submit" name="addCommmentaire" class="btn" data-btn="Ajouter">Ajouter</button>
+                        </form>
+                    {% endif %}
+                {% else %}
+                    <p>Vous devez être connecté pour poster un commentaire</p>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

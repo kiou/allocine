@@ -1,0 +1,54 @@
+admin_film_manager:
+    path:     /admin/film/gestion
+    defaults: { _controller: App\Controller\Film\FilmController::managerAdmin }
+
+admin_film_ajouter:
+    path:     /admin/film/ajouter
+    defaults: { _controller: App\Controller\Film\FilmController::ajouterAdmin }
+
+admin_film_publier:
+    path:     /admin/film/publier/{id}
+    defaults: { _controller: App\Controller\Film\FilmController::publierAdmin }
+    requirements:
+        id: \d+
+
+admin_film_modifier:
+    path:     /admin/film/modifier/{id}
+    defaults: { _controller: App\Controller\Film\FilmController::modifierAdmin }
+    requirements:
+        id: \d+
+
+admin_film_supprimer:
+    path:     /admin/film/supprimer/{id}
+    defaults: { _controller: App\Controller\Film\FilmController::supprimerAdmin }
+    requirements:
+        id: \d+
+
+admin_film_supprimer_image:
+    path:     /admin/film/supprimer-image/{id}
+    defaults: { _controller: App\Controller\Film\FilmController::AdminSupprimerImage }
+    requirements:
+        id: \d+
+
+client_film_view:
+    path: /fiche-film/{slug}/{id}
+    defaults: { _controller: App\Controller\Film\FilmController::ClientView}
+    requirements:
+        slug: ([a-z-0-9]*)
+        id: \d+
+
+client_film_manager:
+    path: /fiches-film
+    defaults: { _controller: App\Controller\Film\FilmController::ClientManager}
+
+#Commentaire
+client_commentaire_ajouter:
+    path:     /commentaire/ajouter
+    defaults: { _controller: App\Controller\Film\FilmController::ajouterCommentaireClient } 
+
+#Categorie / Sous catégorie
+get_souscategorie_admin:
+    path:     /admin/souscategorie/get/{categorie}
+    defaults:
+        _controller: App\Controller\Film\SousCategorieController::getAdminSousCategorie
+        categorie: null

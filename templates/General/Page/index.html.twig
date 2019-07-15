@@ -1,0 +1,28 @@
+{% extends "General/Layout/layout.html.twig" %}
+
+{% block metaTitle %}{{ 'accueil.client.metatitle'|trans }}{% endblock %}
+{% block metaDescription %}{{ 'accueil.client.metadescription'|trans }}{% endblock %}
+
+{% block content %}
+    {{ render(controller(
+        'App\\Controller\\Slider\\SliderController::viewClient',
+        { 'slider': 1 }
+    )) }}
+
+    {{ render(controller(
+        'App\\Controller\\Film\\FilmController::listeAvant',
+        { 'limit': 4 }
+    )) }}
+
+    {{ render(controller(
+        'App\\Controller\\Diaporama\\GalerieController::lastGalerie',
+        { 'limit': 3 }
+    )) }}
+
+    {{ render(controller('App\\Controller\\Evenement\\EvenementController::calendrierEvenement')) }}
+
+    {{ render(controller(
+        'App\\Controller\\Actualite\\ActualiteController::lastActualite',
+        { 'limit': 3 }
+    )) }}
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends "General/Admin/Layout/layout.html.twig" %}
+
+{% block contentTitre %}Gestion des galeries d'images{% endblock %}
+
+{% block content %}
+	<div id="recherche">
+		<form action="{{ path('admin_diaporama_manager') }}" method="post">
+            <select name="langue" class="form-elem medium">
+                <option value="">Choisir une langue</option>
+                {% for langue in langues %}
+                    {% if recherches.langue == langue.code %}
+                        <option value="{{ langue.code }}" selected>{{ langue.nom }}</option>
+                    {% else %}
+                        <option value="{{ langue.code }}">{{ langue.nom }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+			<input type="text" name="recherche" class="form-elem medium" value="{{ recherches.recherche | default('') }}">
+
+			<button type="submit" name="addRecherche"><i class="fa fa-search"></i></button>
+		</form>
+	</div>
+
+	<table class="table">
+		
+		<tr>
+			<th width="15%"></th>
+			<th class="left" width="45%">Galerie d'image</th>
+            <th width="10%">Image</th>
+            <th width="15%">Ordre<br>Décroissant</th>
+			<th colspan="3" width="15%">Actions</th>
+		</tr>
+
+		{% for galerie in pagination %}
+			
+			<tr>
+
+				<td>
+                    {% if galerie.image %}
+					    <img class="tableImage" src="{{ asset('img/galerie/miniature/' ~ galerie.image) }}">
+                    {% else %}
+                        <i class="tableAltIcon fa fa-image"></i>
+                    {% endif %}
+				</td>
+
+				<td class="left">
+					<p class="tableDate">Ajouté le {{ galerie.created|date("d/m/Y à H:i") }}</p>
+					{% if galerie.changed is not null %}
+						<p class="tableDate">Modifié le {{ galerie.changed|date("d/m/Y à H:i") }}</p>
+					{% endif %}
+					<p><strong>{{ galerie.titre }}</strong></p>
+				</td>
+
+                <td>
+                    <a href="{{ path('admin_diaporama_image_manager',{'galerie':galerie.id}) }}" class="btn turquoise">Gestion ({{ galerie.images|length }})</a>
+                </td>
+
+                <td>
+                    <select name="poid" class="form-poid" data-url="{{ path('admin_diaporama_poid',{'id': galerie.id})}}">
+                        {% for i in 1..200 %}
+                            {% if galerie.poid == i%}
+                                <option value="{{ i }}" selected>{{ i }}</option>
+                            {% else %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+
+				{% if galerie.isActive == false %}
+					<td data-url="{{ path('admin_diaporama_publier',{'id': galerie.id})}}" class="tablePublucation">
+                    	<a href="{{ path('admin_diaporama_publier',{'id': galerie.id})}}" title="Publication"><i class="tableAction rouge fa fa-check"></i></a>
+                    </td>
+				{% else %}
+					<td data-url="{{ path('admin_diaporama_publier',{'id': galerie.id})}}" class="tablePublucation">
+                    	<a href="{{ path('admin_diaporama_publier',{'id': galerie.id})}}" title="Publication"><i class="tableAction turquoise fa fa-check"></i></a>
+                    </td>
+				{% endif %}
+
+				<td>
+                    <a href="{{ path('admin_diaporama_modifier',{'id': galerie.id})}}" title="Modifier la galerie d'image"><i class=" tableAction fa fa-pencil-alt"></i></a>
+                </td>
+
+				<td>
+                    <a href="{{ path('admin_diaporama_supprimer',{'id': galerie.id})}}" class="sweetDelete" title="Supprimer la galerie d'image" data-title="Supprimer la galerie d'image" data-text="êtes vous sur ?"><i class=" tableAction fa fa-trash"></i></a>
+                </td>
+			</tr>
+
+		{% else %}
+			<tr>
+				<td colspan="6">Aucune galerie d'image</td>
+			</tr>
+		{% endfor %}
+
+	</table>
+
+	{# display navigation #}
+	<div class="navigation">
+	    {{ knp_pagination_render(pagination) }}
+	</div>
+	
+{% endblock %}

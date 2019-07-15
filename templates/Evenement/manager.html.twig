@@ -1,0 +1,113 @@
+{% extends "General/Layout/layout.html.twig" %}
+
+{% block metaTitle %}{{ 'evenement.client.manager.metatitle'|trans }}{% endblock %}
+{% block metaDescription %}{{ 'evenement.client.manager.metadescription'|trans }}{% endblock %}
+
+{% block contentTitle %}
+    <h1>{{ 'evenement.client.manager.title'|trans }}</h1>
+{% endblock %}
+
+{% block content %}
+    <!-- La recherche -->
+    <div class="recherche">
+        <form action="{{ path('client_evenement_manager') }}" method="post">
+
+            <select name="categorie" class="form-elem form-recherche">
+                <option value="">{{ 'evenement.client.label.categorieall'|trans }}</option>
+                {% for categorie in categories %}
+                    {% if recherches.categorie == categorie.id %}
+                        <option value="{{ categorie.id }}" selected>{{ categorie.nom }}</option>
+                    {% else %}
+                        <option value="{{ categorie.id }}">{{ categorie.nom }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+            <button type="submit" name="addRecherche" class="btn type2 form-recherche" data-btn="{{ 'evenement.client.manager.recherche.bouton'|trans }}">{{ 'evenement.client.manager.recherche.bouton'|trans }}</button>
+        </form>
+
+        <div class="clear"></div>
+    </div>
+
+    <!-- Mise en avant -->
+    {% if avant %}
+        <div class="evenementAvant">
+
+            <div class="evenementImage">
+                {% if avant.image %}
+                    <img src="{{ asset('img/evenement/miniature/' ~ avant.image) }}">
+                {% else %}
+                    <img src="{{ asset('img/evenement/miniature/alt.jpg') }}">
+                {% endif %}
+            </div>
+
+            {% if evenement.categorie %}
+                <div class="evenementCategorie">
+                    <p>{{ evenement.categorie.nom }}</p>
+                </div>
+            {% endif %}
+
+            <div class="evenementTitre">
+                <h3><a href="{{ path('client_evenement_view',{'slug': avant.slug, 'id': avant.id})}}">{{ avant.titre }}</a></h3>
+            </div>
+
+            <div class="evenementResume">
+                <p>{{ avant.resume }}</p>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Liste des événéments -->
+    <div class="evenements">
+
+        {% for evenement in pagination %}
+            <div class="evenement navFull" data-url="{{ path('client_evenement_view',{'slug': evenement.slug, 'id': evenement.id})}}">
+                <div class="evenementImage">
+                    {% if evenement.image %}
+                        <img src="{{ asset('img/evenement/miniature/' ~ evenement.image) }}">
+                    {% else %}
+                        <img src="{{ asset('img/evenement/miniature/alt.jpg') }}">
+                    {% endif %}
+
+                    <div class="evenementPattern"></div>
+
+                    <div class="evenementDate">
+
+                        <div class="evenementDateJour">
+                            <p>{{ evenement.debut|date("d") }}</p>
+                        </div>
+                        <div class="evenementDateMois">
+                            <p>{{ evenement.debut|date("m") }}</p>
+                        </div>
+                        <div class="evenementDateAnnee">
+                            <p>{{ evenement.debut|date("Y") }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="evenementBottom">
+                    {% if evenement.categorie %}
+                        <div class="evenementCategorie">
+                            <p>{{ evenement.categorie.nom }}</p>
+                        </div>
+                    {% endif %}
+
+                    <div class="evenementTitre">
+                        <h3><a href="{{ path('client_evenement_view',{'slug': evenement.slug, 'id': evenement.id})}}">{{ TruncateText(evenement.titre, 30) }}</a></h3>
+                    </div>
+
+                    <div class="evenementResume">
+                        <p>{{ TruncateText(evenement.resume, 120) }}</p>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>{{ 'evenement.client.validators.empty'|trans }}</p>
+        {% endfor %}
+
+        <div class="clear"></div>
+
+    </div>
+
+    {{ knp_pagination_render(pagination) }}
+{% endblock %}

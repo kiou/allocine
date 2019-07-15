@@ -1,0 +1,42 @@
+<header class="header">
+    <div class="inner">
+
+        <div class="headerLeft">
+            <div class="headerLogo">
+                <a href="{{ path('client_page_index') }}"><img src="{{ asset('img/layout/logo.png') }}"></a>
+            </div>
+        </div>
+
+        <div class="headerCenter">
+             {{ render(controller('App\\Controller\\Page\\MenuController::managerClient',{'sfmenu':true})) }}
+        </div>
+
+        <div class="headerRight">
+         
+            <!--
+            <div class="headerLangue">
+                {# {{ render(controller('App\\Controller\\General\\GeneralController::SelecteurLangue')) }} #}
+            </div>
+            -->
+
+            <div class="headerPictos">
+                <a href="#" class="openNewsletter"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <div class="headerReseaux">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+
+            <div class="headerBtnMobile">
+                <span></span>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+
+        <div class="clear"></div>
+
+    </div>
+</header>

@@ -1,0 +1,80 @@
+{% set menuUtilisateur = ['admin_user_manager', 'admin_user_ajouter', 'admin_user_modifier','admin_user_historique'] %}
+{% set menuPage = ['admin_page_manager', 'admin_page_ajouter', 'admin_page_modifier','admin_menu_manager', 'admin_menu_ajouter', 'admin_menu_modifier'] %}
+{% set menuSlider = ['admin_slider_manager', 'admin_slider_ajouter', 'admin_slider_modifier','admin_sliderslide_manager', 'admin_sliderslide_ajouter', 'admin_sliderslide_modifier'] %}
+{% set menuFilm = ['admin_film_manager', 'admin_film_ajouter', 'admin_film_modifier'] %}
+{% set menuPersonne = ['admin_personne_manager', 'admin_personne_ajouter', 'admin_personne_modifier'] %}
+{% set menuDiaporama = ['admin_diaporama_manager', 'admin_diaporama_ajouter', 'admin_diaporama_modifier','admin_diaporama_categorie_manager', 'admin_diaporama_categorie_modifier', 'admin_diaporama_categorie_ajouter', 'admin_diaporama_image_manager','admin_diaporama_image_ajouter','admin_diaporama_image_modifier'] %}
+{% set menuEvenement = ['admin_evenement_manager', 'admin_evenement_ajouter', 'admin_evenement_modifier','admin_evenementcategorie_manager', 'admin_evenementcategorie_ajouter', 'admin_evenementcategorie_modifier'] %}
+{% set menuActualite = ['admin_actualite_manager', 'admin_actualite_ajouter', 'admin_actualite_modifier','admin_actualitecategorie_manager', 'admin_actualitecategorie_ajouter', 'admin_actualitecategorie_modifier'] %}
+
+<nav class="menu">
+
+	<div class="menuEntreprise">
+		<p>Orani</p>
+	</div>
+
+	<div class="menuLogo">
+		<img src="{{ asset('img/admin/logo.svg') }}" alt="">
+	</div>
+
+	<a href="{{ path('admin_page_index')}}" class="menuNav {{ getCurrentMenu(['admin_page_index']) }}"><i class="fa fa-home"></i>Dashboard</a>
+
+    <a href="#" data-nav="utilisateur-menu" class="menuNav {{ getCurrentMenu(menuUtilisateur) }}"> <i class="fa fa-users"></i>Utilisateurs <i class="fa fa-angle-right"></i></a>
+    <ul class="utilisateur-menu {{ getCurrentMenu(menuUtilisateur) }}">
+        <li class="{{ getCurrentMenu(['admin_user_ajouter']) }}"><a href="{{ path('admin_user_ajouter')}}">Ajouter un utilisateur</a></li>
+        <li class="{{ getCurrentMenu(['admin_user_manager']) }}"><a href="{{ path('admin_user_manager')}}">Gestion des utilisateurs</a></li>
+        <li class="{{ getCurrentMenu(['admin_user_historique']) }}"><a href="{{ path('admin_user_historique')}}">Gestion des historiques</a></li>
+        <li><a href="{{ path('admin_newsletter_export')}}">Newsletter CSV</a></li>
+    </ul>
+
+    <a href="#" data-nav="page-menu" class="menuNav {{ getCurrentMenu(menuPage) }}"> <i class="fa fa-file"></i> Pages <i class="fa fa-angle-right"></i></a>
+    <ul class="page-menu {{ getCurrentMenu(menuPage) }}">
+        <li class="{{ getCurrentMenu(['admin_page_ajouter']) }}"><a href="{{ path('admin_page_ajouter')}}">Ajouter une page</a></li>
+        <li class="{{ getCurrentMenu(['admin_page_manager']) }}"><a href="{{ path('admin_page_manager')}}">Gestion des pages</a></li>
+        <li class="{{ getCurrentMenu(['admin_menu_ajouter']) }}"><a href="{{ path('admin_menu_ajouter')}}">Ajouter un onglet menu</a></li>
+        <li class="{{ getCurrentMenu(['admin_menu_manager']) }}"><a href="{{ path('admin_menu_manager')}}">Gestion du menu</a></li>
+    </ul>
+    
+    <a href="#" data-nav="slider-menu" class="menuNav {{ getCurrentMenu(menuSlider) }}"> <i class="fa fa-images"></i>Sliders <i class="fa fa-angle-right"></i></a>
+    <ul class="slider-menu {{ getCurrentMenu(menuSlider) }}">
+        <li class="{{ getCurrentMenu(['admin_slider_ajouter']) }}"><a href="{{ path('admin_slider_ajouter')}}">Ajouter un slider</a></li>
+        <li class="{{ getCurrentMenu(['admin_slider_manager']) }}"><a href="{{ path('admin_slider_manager')}}">Gestion des sliders</a></li>
+    </ul>
+
+    <a href="#" data-nav="personne-menu" class="menuNav {{ getCurrentMenu(menuPersonne) }}"> <i class="fa fa-users"></i>Acteurs/Réalisateurs <i class="fa fa-angle-right"></i></a>
+    <ul class="personne-menu {{ getCurrentMenu(menuPersonne) }}">
+        <li class="{{ getCurrentMenu(['admin_personne_ajouter']) }}"><a href="{{ path('admin_personne_ajouter')}}">Ajouter une personne</a></li>
+        <li class="{{ getCurrentMenu(['admin_personne_manager']) }}"><a href="{{ path('admin_personne_manager')}}">Gestion des personnes</a></li>
+    </ul>
+
+    <a href="#" data-nav="diaporama-menu" class="menuNav {{ getCurrentMenu(menuDiaporama) }}"> <i class="fa fa-image"></i>Galeries d'images <i class="fa fa-angle-right"></i></a>
+    <ul class="diaporama-menu {{ getCurrentMenu(menuDiaporama) }}">
+        <li class="{{ getCurrentMenu(['admin_diaporama_ajouter']) }}"><a href="{{ path('admin_diaporama_ajouter')}}">Ajouter une galerie d'image</a></li>
+        <li class="{{ getCurrentMenu(['admin_diaporama_manager']) }}"><a href="{{ path('admin_diaporama_manager')}}">Gestion des galeries d'images</a></li>
+        <li class="{{ getCurrentMenu(['admin_diaporama_categorie_ajouter']) }}"><a href="{{ path('admin_diaporama_categorie_ajouter')}}">Ajouter une catégorie</a></li>
+        <li class="{{ getCurrentMenu(['admin_diaporama_categorie_manager']) }}"><a href="{{ path('admin_diaporama_categorie_manager')}}">Gestion des catégories</a></li>
+    </ul>
+
+    <a href="#" data-nav="film-menu" class="menuNav {{ getCurrentMenu(menuFilm) }}"> <i class="fa fa-video"></i>Films <i class="fa fa-angle-right"></i></a>
+    <ul class="film-menu {{ getCurrentMenu(menuFilm) }}">
+        <li class="{{ getCurrentMenu(['admin_film_ajouter']) }}"><a href="{{ path('admin_film_ajouter')}}">Ajouter un film</a></li>
+        <li class="{{ getCurrentMenu(['admin_film_manager']) }}"><a href="{{ path('admin_film_manager')}}">Gestion des films</a></li>
+    </ul>
+
+    <a href="#" data-nav="evenement-menu" class="menuNav {{ getCurrentMenu(menuEvenement) }}"> <i class="fa fa-calendar-alt"></i>Evénements <i class="fa fa-angle-right"></i></a>
+    <ul class="evenement-menu {{ getCurrentMenu(menuEvenement) }}">
+        <li class="{{ getCurrentMenu(['admin_evenement_ajouter']) }}"><a href="{{ path('admin_evenement_ajouter')}}">Ajouter un événement</a></li>
+        <li class="{{ getCurrentMenu(['admin_evenement_manager']) }}"><a href="{{ path('admin_evenement_manager')}}">Gestion des événements</a></li>
+        <li class="{{ getCurrentMenu(['admin_evenementcategorie_ajouter']) }}"><a href="{{ path('admin_evenementcategorie_ajouter')}}">Ajouter une catégorie</a></li>
+        <li class="{{ getCurrentMenu(['admin_evenementcategorie_manager']) }}"><a href="{{ path('admin_evenementcategorie_manager')}}">Gestion des catégories</a></li>
+    </ul>
+
+    <a href="#" data-nav="actualite-menu" class="menuNav {{ getCurrentMenu(menuActualite) }}"> <i class="fa fa-newspaper"></i>Actualités <i class="fa fa-angle-right"></i></a>
+    <ul class="actualite-menu {{ getCurrentMenu(menuActualite) }}">
+        <li class="{{ getCurrentMenu(['admin_actualite_ajouter']) }}"><a href="{{ path('admin_actualite_ajouter')}}">Ajouter une actualité</a></li>
+        <li class="{{ getCurrentMenu(['admin_actualite_manager']) }}"><a href="{{ path('admin_actualite_manager')}}">Gestion des actualités</a></li>
+        <li class="{{ getCurrentMenu(['admin_actualitecategorie_ajouter']) }}"><a href="{{ path('admin_actualitecategorie_ajouter')}}">Ajouter une catégorie</a></li>
+        <li class="{{ getCurrentMenu(['admin_actualitecategorie_manager']) }}"><a href="{{ path('admin_actualitecategorie_manager')}}">Gestion des catégories</a></li>
+    </ul>
+
+</nav>

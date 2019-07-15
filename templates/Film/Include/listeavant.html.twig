@@ -1,0 +1,26 @@
+
+<div class="bloc">
+
+    <div class="blocHeader">
+        <h2 class="title">Les derniers film ajoutés</h2>
+        <p>Découvrir les dernièrs films</p>
+    </div>
+
+    <div class="fichesFilm">
+        {% for film in films %}
+            <div class="ficheFilm">
+                {% if film.image %}
+                    <img src="{{ asset('img/film/miniature/' ~ film.image) }}">
+                {% else %}
+                    <i class="far fa-image"></i>
+                {% endif %}
+
+                <a href="{{ path('client_film_view',{'slug': film.slug, 'id': film.id}) }}"><h3>{{ film.titre }}</h3></a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="blocFooter">
+        <a href="{{ path('client_film_manager')}}" class="btn" data-btn="La liste des films">La liste des films</a>
+    </div>
+</div>

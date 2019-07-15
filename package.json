@@ -1,0 +1,10 @@
+{
+  "name": "Allocine",
+  "version": "0.0.0",
+  "description": "allocinev1\r ==========",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^2.0.0"
+  }
+}

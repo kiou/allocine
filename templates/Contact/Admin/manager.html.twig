@@ -1,0 +1,75 @@
+{% extends "General/Admin/Layout/layout.html.twig" %}
+
+{% block contentTitre %}Gestion des contacts{% endblock %}
+
+{% block content %}
+	<div id="recherche">
+		<form action="{{ path('admin_contact_manager') }}" method="post">
+            <select name="langue" class="form-elem medium">
+                <option value="">Choisir une langue</option>
+                {% for langue in langues %}
+                    {% if recherches.langue == langue.code %}
+                        <option value="{{ langue.code }}" selected>{{ langue.nom }}</option>
+                    {% else %}
+                        <option value="{{ langue.code }}">{{ langue.nom }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+			<select name="objet" class="form-elem medium">
+				<option value="">Choisir un objet</option>
+				{% for objet in objets %}
+					{% if objet.id == recherches.objet %}
+						<option value="{{ objet.id }}" selected>{{ objet.nom }}</option>
+                    {% else %}
+						<option value="{{ objet.id }}">{{ objet.nom }}</option>
+                    {% endif %}
+				{% endfor %}
+			</select>
+
+			<button type="submit" name="addRecherche"><i class="fa fa-search"></i></button>
+		</form>
+	</div>
+
+	<table class="table">
+		
+		<tr>
+			<th class="left" width="90%">Contact</th>
+			<th colspan="2" width="10%">Actions</th>
+		</tr>
+
+		{% for contact in pagination %}
+			
+			<tr>
+
+				<td class="left">
+					<p class="tableDate">Ajouté le {{ contact.created|date("d/m/Y à H:i") }}</p>
+					{% if contact.changed is not null %}
+						<p class="tableDate">Modifié le {{ contact.changed|date("d/m/Y à H:i") }}</p>
+					{% endif %}
+					<p><strong>{{ contact.prenom }} {{ contact.nom }}</strong></p>
+				</td>
+
+				<td>
+					<a href="{{ path('admin_contact_view',{'id': contact.id})}}" title="Voir le contact"><i class="fa fa-eye tableAction"></i></a>
+				</td>
+
+				<td>
+                    <a href="{{ path('admin_contact_supprimer',{'id': contact.id})}}" class="sweetDelete" title="Supprimer le contact" data-title="Supprimer le contact" data-text="êtes vous sur ?"><i class=" tableAction fa fa-trash"></i></a>
+                </td>
+			</tr>
+
+		{% else %}
+			<tr>
+				<td colspan="3">Aucun contact</td>
+			</tr>
+		{% endfor %}
+
+	</table>
+
+	{# display navigation #}
+	<div class="navigation">
+	    {{ knp_pagination_render(pagination) }}
+	</div>
+	
+{% endblock %}

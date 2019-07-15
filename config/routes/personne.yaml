@@ -1,0 +1,26 @@
+admin_personne_manager:
+    path:     /admin/personne/gestion
+    defaults: { _controller: App\Controller\Personne\PersonneController::managerAdmin }
+
+admin_personne_ajouter:
+    path:     /admin/personne/ajouter
+    defaults: { _controller: App\Controller\Personne\PersonneController::ajouterAdmin }
+
+admin_personne_modifier:
+    path:     /admin/personne/modifier/{id}
+    defaults: { _controller: App\Controller\Personne\PersonneController::modifierAdmin }
+    requirements:
+        id: \d+
+
+admin_personne_supprimer:
+    path:     /admin/personne/supprimer/{id}
+    defaults: { _controller: App\Controller\Personne\PersonneController::supprimerAdmin }
+    requirements:
+        id: \d+
+
+client_personne_view:
+    path: /fiche-peronne/{slug}/{id}
+    defaults: { _controller: App\Controller\Personne\PersonneController::ClientView}
+    requirements:
+        slug: ([a-z-0-9]*)
+        id: \d+

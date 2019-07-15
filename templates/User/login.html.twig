@@ -1,0 +1,34 @@
+{% extends "General/Layout/layout.html.twig" %}
+
+{% block metaTitle %}{{ 'connexion.metatitle'|trans }}{% endblock %}
+
+{% block contentTitle %}
+    <h1>{{ 'connexion.title'|trans }}</h1>
+{% endblock %}
+
+{% block content %}
+    {% if error %}
+        <div class="message error">
+            <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+        </div>
+    {% endif %}
+
+    <form action="{{ path('login') }}" method="post">
+        <label for="username">{{ 'user.label.email'|trans }}</label>
+        <input type="text" class="form-elem big" name="_username" value="{{ last_username }}">
+
+        <label for="password">{{ 'user.label.password'|trans }}</label>
+        <input type="password" class="form-elem big" name="_password">
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <br>
+
+        <button class="btn" data-btn="{{ 'connexion.label.submit'|trans }}" type="submit">{{ 'connexion.label.submit'|trans }}</button>
+    </form>
+
+    <br><p>
+        {{ 'user.links.inscription'|trans }} <a href="{{ path('register') }}">{{ 'user.links.inscriptionlink'|trans }}</a><br>
+        {{ 'user.links.reinitialisation'|trans }} <a href="{{ path('reinitialisation') }}">{{ 'user.links.reinitialisationlink'|trans }}</a>
+    </p>
+{% endblock %}

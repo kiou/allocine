@@ -1,0 +1,43 @@
+{% extends "General/Layout/layout.html.twig" %}
+
+{% block metaTitle %}{{ personne.referencement.title }}{% endblock %}
+{% block metaDescription %}{{ personne.referencement.description }}{% endblock %}
+
+{% block openGraph %}
+    {% include"Referencement/Include/view.html.twig" with {'data': personne} %}
+{% endblock %}
+
+{% block breadcrumb %}
+    {{ include("General/Include/breadcrumb.html.twig", {'breadcrumb':breadcrumb }) }}
+{% endblock %}
+
+{% block contentTitle %}
+    <h1>{{ personne.prenom }} {{ personne.nom }}</h1>
+{% endblock %}
+
+{% block content %}
+
+    <table>
+        <tr>
+            <th>Acteur</th>
+        </tr>
+        {% for film in personne.filmacteurs %}
+            <tr>
+                <td><p>{{ film.titre }}</p></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    
+    <table>
+        <tr>
+            <th>Réalisateur</th>
+        </tr>
+        {% for film in personne.filmrealisateurs %}
+            <tr>
+                <td><p>{{ film.titre }}</p></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "General/Layout/layout.html.twig" %}
+
+{% block metaTitle %}Liste des films{% endblock %}
+{% block metaDescription %}Liste des films{% endblock %}
+
+{% block breadcrumb %}
+    {{ include("General/Include/breadcrumb.html.twig", {'breadcrumb':breadcrumb }) }}
+{% endblock %}
+
+{% block contentTitle %}
+    <h1>Liste des films</h1>
+{% endblock %}
+
+{% block content %}
+    
+    <div class="films">
+        <div class="filmsLeft">
+        
+            <form action="#" method="post">
+            
+                <select name="categorie" class="form-elem formCategorie" data-url="{{ path('get_souscategorie_admin') }}">
+                    <option value="">Choisir une catégorie</option>
+                    {% for categorie in categories %}
+                        {% if recherches.categorie == categorie.id %}
+                            <option value="{{categorie.id}}" selected>{{categorie.titre}}</option>
+                        {% else %}
+                            <option value="{{categorie.id}}">{{categorie.titre}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+
+                <select name="souscategorie" class="form-elem formSousCategorie">
+                    <option value="">Choisir une sous catégorie</option>
+                    {% if souscategories is not null %}
+                   
+                        {% for souscategorie in souscategories %}
+                            {% if recherches.souscategorie == souscategorie.id %}
+                                <option value="{{souscategorie.id}}" selected>{{souscategorie.titre}}</option>
+                            {% else %}
+                                <option value="{{souscategorie.id}}">{{souscategorie.titre}}</option>
+                            {% endif %}
+                        {% endfor %}
+
+                    {% endif %}
+                </select>
+
+                <select name="acteur" class="form-elem ">
+                    <option value="">Choisir un acteur</option>
+                    {% for acteur in acteurs %}
+                        {% if recherches.acteur == acteur.id %}
+                            <option value="{{acteur.id}}" selected>{{acteur.prenom}} {{acteur.nom}}</option>
+                        {% else %}
+                            <option value="{{acteur.id}}">{{acteur.prenom}} {{acteur.nom}}</option>
+                        {% endif %}
+                    {% endfor %}    
+                </select>
+
+                <button type="submit" name="recherche" class="btn" data-btn="Recherche">Recherche</button>
+            
+            </form>
+
+        </div>
+
+        <div class="filmsRight">
+        
+            <div class="fichesFilm">
+                {% for film in films %}
+                    <div class="ficheFilm">
+                        {% if film.image %}
+                            <img src="{{ asset('img/film/miniature/' ~ film.image) }}">
+                        {% else %}
+                            <i class="far fa-image"></i>
+                        {% endif %}
+
+                        <a href="{{ path('client_film_view',{'slug': film.slug, 'id': film.id}) }}"><h3>{{ film.titre }}</h3></a>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {# display navigation #}
+            <div class="navigation">
+                {{ knp_pagination_render(films) }}
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

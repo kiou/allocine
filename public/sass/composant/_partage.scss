@@ -1,0 +1,30 @@
+.partage{
+    padding: 10px 0px 0px 0px;
+    button{
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 14px;
+        background:none;
+        border: none;
+        color: $blanc;
+        @include transition-property(opacity);
+        @include transition-duration(0.3s);
+        @include transition-timing-function(ease);
+        opacity:1;
+        &:hover{
+            opacity:0.6;
+        }
+    }
+    .facebook{
+        background-color: $facebook;
+    }
+    .twitter{
+        background-color: $twitter;
+    }
+    .linkedin{
+        background-color: $linkedin;
+    }
+    .fa{
+        padding-right: 7px;
+    }
+}

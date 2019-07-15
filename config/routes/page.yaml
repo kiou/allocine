@@ -1,0 +1,73 @@
+# Page
+admin_page_manager:
+    path:     /admin/page/gestion
+    defaults: { _controller: App\Controller\Page\PageController::managerAdmin }
+
+admin_page_ajouter:
+    path:     /admin/page/ajouter
+    defaults: { _controller: App\Controller\Page\PageController::ajouterAdmin }
+
+admin_page_publier:
+    path:     /admin/page/publier/{id}
+    defaults: { _controller: App\Controller\Page\PageController::publierAdmin }
+    requirements:
+        id: \d+
+
+admin_page_poid:
+    path:     /admin/page/poid/{id}/{poid}
+    defaults:
+        _controller: App\Controller\Page\PageController::poidAdmin
+        poid : 1
+    requirements:
+        id: \d+
+        poid: \d+
+
+admin_page_modifier:
+    path:     /admin/page/modifier/{id}
+    defaults: { _controller: App\Controller\Page\PageController::modifierAdmin }
+    requirements:
+        id: \d+
+
+admin_page_supprimer:
+    path:     /admin/page/supprimer/{id}
+    defaults: { _controller: App\Controller\Page\PageController::supprimerAdmin }
+    requirements:
+        id: \d+
+
+client_page_view:
+    path:     /{slug}/{id}
+    defaults: { _controller: App\Controller\Page\PageController::viewClient }
+    requirements:
+        slug: ([a-z-0-9]*)
+        id: \d+
+
+# Menu
+admin_menu_manager:
+    path:     /admin/menu/gestion
+    defaults: { _controller: App\Controller\Page\MenuController::managerAdmin }
+
+admin_menu_manager_update:
+    path:     /admin/menu/gestion/modifier
+    defaults: { _controller: App\Controller\Page\MenuController::managerUpdateAdmin }
+
+admin_menu_ajouter:
+    path:     /admin/menu/ajouter
+    defaults: { _controller: App\Controller\Page\MenuController::ajouterAdmin }
+
+admin_menu_modifier:
+    path:     /admin/menu/modifier/{id}
+    defaults: { _controller: App\Controller\Page\MenuController::modifierAdmin }
+    requirements:
+        id: \d+
+
+admin_menu_publier:
+    path:     /admin/menu/publier/{id}
+    defaults: { _controller: App\Controller\Page\MenuController::publierAdmin }
+    requirements:
+        id: \d+
+
+admin_menu_supprimer:
+    path:     /admin/menu/supprimer/{id}
+    defaults: { _controller: App\Controller\Page\MenuController::supprimerAdmin }
+    requirements:
+        id: \d+

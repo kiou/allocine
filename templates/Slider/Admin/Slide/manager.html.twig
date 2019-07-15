@@ -1,0 +1,79 @@
+{% extends "General/Admin/Layout/layout.html.twig" %}
+
+{% block contentTitre %}Gestion des slides pour : {{ slider.titre }}{% endblock %}
+
+{% block breadcrumb %}
+	<div id="breadcrumb">
+		{{ include("General/Admin/Include/breadcrumb.html.twig") }}
+	</div>
+{% endblock %}
+
+{% block content %}
+
+	<a href="{{ path('admin_sliderslide_ajouter',{'slider':slider.id}) }}" class="btn addContent turquoise">Ajouter un slide</a>
+
+	<table class="table">
+		
+		<tr>
+			<th width="15%"></th>
+			<th class="left" width="55%">Slide</th>
+			<th width="15%">Ordre<br>Décroissant</th>
+			<th colspan="3" width="15%">Actions</th>
+		</tr>
+
+		{% for slide in slides %}
+			
+			<tr>
+
+				<td>
+					<img class="tableImage" src="{{ asset('img/slider/slide/miniature/' ~ slide.image) }}">
+				</td>
+
+				<td class="left">
+					<p class="tableDate">Ajouté le {{ slide.created|date("d/m/Y à H:i") }}</p>
+					{% if slide.changed is not null %}
+						<p class="tableDate">Modifié le {{ slide.changed|date("d/m/Y à H:i") }}</p>
+					{% endif %}
+					<p><strong>{{ slide.titre }}</strong></p>
+				</td>
+
+				<td>
+					<select name="poid" class="form-poid" data-url="{{ path('admin_sliderslide_poid',{'slider': slider.id, 'id': slide.id})}}">
+                        {% for i in 1..200 %}
+                            {% if slide.poid == i%}
+								<option value="{{ i }}" selected>{{ i }}</option>
+                            {% else %}
+								<option value="{{ i }}">{{ i }}</option>
+                            {% endif %}
+                        {% endfor %}
+					</select>
+				</td>
+
+                {% if slide.isActive == false %}
+					<td data-url="{{ path('admin_sliderslide_publier',{'slider': slider.id, 'id': slide.id})}}" class="tablePublucation">
+                    	<a href="{{ path('admin_sliderslide_publier',{'slider': slider.id, 'id': slide.id})}}" title="Publication"><i class="tableAction rouge fa fa-check"></i></a>
+                    </td>
+				{% else %}
+					<td data-url="{{ path('admin_sliderslide_publier',{'slider': slider.id, 'id': slide.id})}}" class="tablePublucation">
+                    	<a href="{{ path('admin_sliderslide_publier',{'slider': slider.id, 'id': slide.id})}}" title="Publication"><i class="tableAction turquoise fa fa-check"></i></a>
+                    </td>
+				{% endif %}
+
+				<td>
+                    <a href="{{ path('admin_sliderslide_modifier',{'slider': slider.id, 'id': slide.id})}}" title="Modifier le slide"><i class=" tableAction fa fa-pencil-alt"></i></a>
+                </td>
+
+				<td>
+                    <a href="{{ path('admin_sliderslide_supprimer',{'slider': slider.id, 'id': slide.id})}}" class="sweetDelete" title="Supprimer le slide" data-title="Supprimer le slide" data-text="êtes vous sur ?"><i class=" tableAction fa fa-trash"></i></a>
+                </td>
+			</tr>
+
+		{% else %}
+			<tr>
+				<td colspan="6">Aucun slide</td>
+			</tr>
+		{% endfor %}
+
+	</table>
+
+{% endblock %}

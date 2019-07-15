@@ -1,0 +1,72 @@
+user:
+    resource: "routes/user.yaml"
+    prefix:   /{_locale}
+    requirements:
+      _locale: en|fr
+
+general:
+    resource: "routes/general.yaml"
+    prefix:   /{_locale}
+    requirements:
+      _locale: en|fr
+
+page:
+    resource: "routes/page.yaml"
+    prefix:   /{_locale}
+    requirements:
+      _locale: en|fr
+
+contact:
+    resource: "routes/contact.yaml"
+    prefix:   /{_locale}
+    requirements:
+      _locale: en|fr
+
+evenement:
+    resource: "routes/evenement.yaml"
+    prefix:   /{_locale}
+    requirements:
+      _locale: en|fr
+
+actualite:
+    resource: "routes/actualite.yaml"
+    prefix:   /{_locale}
+    requirements:
+      _locale: en|fr
+
+slider:
+    resource: "routes/slider.yaml"
+    prefix:   /{_locale}
+    requirements:
+      _locale: en|fr
+
+film:
+    resource: "routes/film.yaml"
+    prefix:   /{_locale}
+    requirements:
+      _locale: en|fr
+
+personne:
+    resource: "routes/personne.yaml"
+    prefix:   /{_locale}
+    requirements:
+      _locale: en|fr
+
+diaporama:
+    resource: "routes/diaporama.yaml"
+    prefix:   /{_locale}
+    requirements:
+      _locale: en|fr
+
+referencement:
+    resource: "routes/referencement.yaml"
+    prefix:   /{_locale}
+    requirements:
+      _locale: en|fr
+
+redirect_rules_nolocal:
+    path:  /
+    defaults:
+        _controller : FrameworkBundle:Redirect:urlRedirect
+        path: /fr/
+        permanent: true

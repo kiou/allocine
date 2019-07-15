@@ -1,0 +1,47 @@
+<div class="bloc">
+
+    <div class="blocHeader">
+        <h2 class="title">{{ 'diaporama.client.include.liste.title'|trans }}</h2>
+        <p>{{ 'diaporama.client.include.liste.soustitle'|trans }}</p>
+    </div>
+
+    <div class="diaporamas">
+        {% if galeries %}
+            {% for galerie in galeries %}
+                <div class="galerie navFull" data-url="{{ path('client_diaporama_view',{'slug': galerie.slug, 'id': galerie.id})}}">
+                    {% if galerie.image %}
+                        <img src="{{ asset('img/galerie/miniature/' ~ galerie.image) }}">
+                    {% else %}
+                        <img src="{{ asset('img/galerie/miniature/alt.jpg') }}">
+                    {% endif %}
+
+                    <div class="galeriePattern"></div>
+
+                    <div class="galerieBottom">
+                        {% if galerie.categorie %}
+                            <div class="galerieCategorie">
+                                <p>{{ galerie.categorie.nom }}</p>
+                            </div>
+                        {% endif %}
+
+                        <div class="galerieTitre">
+                            <h3><a href="{{ path('client_diaporama_view',{'slug': galerie.slug, 'id': galerie.id})}}">{{ TruncateText(galerie.titre, 60) }}</a></h3>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>{{ 'diaporama.client.validators.empty'|trans }}</p>
+        {% endif %}
+
+        <div class="clear"></div>
+    </div>
+    
+    <div class="blocFooter">
+        <a href="{{ path('client_diaporama_manager')}}" class="btn" data-btn="{{ 'diaporama.client.include.liste.voirplus'|trans }}">{{ 'diaporama.client.include.liste.voirplus'|trans }}</a>
+    </div>
+
+</div>
+
+
+

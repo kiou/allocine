@@ -1,0 +1,27 @@
+<div class="newsletter">
+    <div class="inner">
+        <div class="newsletterClose"><i class="fa fa-times"></i></div>
+
+        <h2>{{ 'newsletter.client.bloctitre'|trans|raw }}</h2>
+
+        {{ form_start(form, {'action': path('client_newsletter_ajout'), 'attr': {novalidate: 'novalidate', 'id': 'newsletterForm'}}) }}
+
+            {{ form_errors(form) }}
+
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-elem', 'placeholder':'user.label.emailexemple'|trans }}) }}
+
+            {{ form_widget(form.langue, {'value': app.request.locale}) }}
+
+            <br>
+
+            {{ form_widget(form.Enregistrer, {
+                'attr' : {'data-btn': 'newsletter.client.bloclabel.submit'|trans, 'class' : 'btn type1' },
+                'label' : 'newsletter.client.bloclabel.submit'|trans
+            }) }}
+
+            {{ form_rest(form) }}
+
+        {{ form_end(form) }}
+    </div>
+</div>

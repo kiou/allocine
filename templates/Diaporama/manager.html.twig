@@ -1,0 +1,64 @@
+{% extends "General/Layout/layout.html.twig" %}
+
+{% block metaTitle %}{{ 'diaporama.client.manager.metatitle'|trans }}{% endblock %}
+{% block metaDescription %}{{ 'diaporama.client.manager.metadescription'|trans }}{% endblock %}
+
+{% block contentTitle %}
+    <h1>{{ 'diaporama.client.manager.title'|trans }}</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="recherche">
+        <form action="{{ path('client_diaporama_manager') }}" method="post">
+
+            <select name="categorie" class="form-elem form-recherche">
+                <option value="">{{ 'diaporama.client.label.categorieall'|trans }}</option>
+                {% for categorie in categories %}
+                    {% if recherches.categorie == categorie.id %}
+                        <option value="{{ categorie.id }}" selected>{{ categorie.nom }}</option>
+                    {% else %}
+                        <option value="{{ categorie.id }}">{{ categorie.nom }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+            <button type="submit" name="addRecherche" class="form-recherche btn type2" data-btn="{{ 'diaporama.client.manager.recherche.bouton'|trans }}">{{ 'diaporama.client.manager.recherche.bouton'|trans }}</button>
+
+            <div class="clear"></div>
+        </form>
+    </div>
+
+    <div class="diaporamas">
+
+        {% for galerie in pagination %}
+            <div class="galerie navFull" data-url="{{ path('client_diaporama_view',{'slug': galerie.slug, 'id': galerie.id})}}">
+                {% if galerie.image %}
+                    <img src="{{ asset('img/galerie/miniature/' ~ galerie.image) }}">
+                {% else %}
+                    <img src="{{ asset('img/galerie/miniature/alt.jpg') }}">
+                {% endif %}
+
+                <div class="galeriePattern"></div>
+
+                <div class="galerieBottom">
+                    {% if galerie.categorie %}
+                        <div class="galerieCategorie">
+                            <p>{{ galerie.categorie.nom }}</p>
+                        </div>
+                    {% endif %}
+
+                    <div class="galerieTitre">
+                        <h3><a href="{{ path('client_diaporama_view',{'slug': galerie.slug, 'id': galerie.id})}}">{{ TruncateText(galerie.titre, 60) }}</a></h3>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>{{ 'diaporama.client.validators.empty'|trans }}</p>
+        {% endfor %}
+
+        <div class="clear"></div>
+
+    </div>
+
+    {{ knp_pagination_render(pagination) }}
+{% endblock %}

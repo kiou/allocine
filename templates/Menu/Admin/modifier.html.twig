@@ -1,0 +1,59 @@
+{% extends "General/Admin/Layout/layout.html.twig" %}
+
+{% block contentTitre %}Modifier un onglet{% endblock %}
+
+{% block breadcrumb %}
+    <div id="breadcrumb">
+        {{ include("General/Admin/Include/breadcrumb.html.twig") }}
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    {{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
+
+        {{ form_errors(form) }}
+
+        {{ form_label(form.titre, "Titre *") }}
+        {{ form_errors(form.titre) }}
+        {{ form_widget(form.titre, {'attr': {'class': 'form-elem big'}}) }}
+
+        {{ form_label(form.lien, "Lien") }}
+        {{ form_errors(form.lien) }}
+        {{ form_widget(form.lien, {'attr': {'class': 'form-elem big'}}) }}
+        <div class="form-legende">
+            Interne : uniquement la fin de l'url ex : actualite/une-actualite<br>
+            Externe : n'oubliez pas le <strong>http://</strong>
+        </div>
+
+        <div class="form-radio">
+            {{ form_label(form.destination, "Destination *") }}
+            {{ form_errors(form.destination) }}
+            {{ form_widget(form.destination) }}
+        </div>
+
+        <br>
+
+        <div class="tabs">
+            <ul class="tabsMenu">
+                <li><a href="#tabs-1">Langue *</a></li>
+            </ul>
+
+            <div class="tabsContent" id="tabs-1">
+                {{ form_label(form.langue, "Langue *") }}
+                {{ form_errors(form.langue) }}
+                {{ form_widget(form.langue, {'attr': {'class': 'form-elem big'}}) }}
+            </div>
+        </div>
+
+        <br>
+
+        {{ form_widget(form.Enregistrer, {'attr': {'class': 'form-submit medium turquoise'}}) }}
+
+        {{ form_rest(form) }}
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+

@@ -1,0 +1,26 @@
+@media screen and (max-width: 1200px) {
+
+	.headerMobile{
+		display: block;
+	}
+
+	.menu {
+		@include transform(translateX(-180px));
+        @include transition-property(transform);
+        @include transition-duration(0.4s);
+        @include transition-timing-function(ease);
+	}
+
+	.container{
+		@include transform(translateX(0px));
+		width: 100%;
+        @include transition-property(width, transform);
+        @include transition-duration(0.4s);
+        @include transition-timing-function(ease);
+    }
+
+    .headerAcces{
+        padding-left: 10px; 
+    }
+
+}
